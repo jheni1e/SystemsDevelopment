@@ -25,8 +25,7 @@ db.people.insertMany([
         lastName: "ca",
         salary: 2100
     },
-])
-    ;
+]);
 
 const arraypeople = [
     {
