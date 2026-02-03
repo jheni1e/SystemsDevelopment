@@ -38,6 +38,41 @@ const arraypeople = [
         lastName: "joy",
         salary: 2103
     },
+    {
+        name: "Thay",
+        lastName: "nar",
+        salary: 2104
+    },
+    {
+        name: "Kessy",
+        lastName: "ane",
+        salary: 2105
+    },
+    {
+        name: "Helo",
+        lastName: "world",
+        salary: 2106
+    },
+    {
+        name: "Beca",
+        lastName: "iwouldlikearing",
+        salary: 2107
+    },
+    {
+        name: "Kety",
+        lastName: "jomes",
+        salary: 2108
+    },
+    {
+        name: "Bruna",
+        lastName: "do empadao",
+        salary: 2109
+    },
+    {
+        name: "Lays",
+        lastName: "japonesinha",
+        salary: 2110
+    },
 ];
 
 use('bosch');
