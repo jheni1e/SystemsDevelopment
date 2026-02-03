@@ -114,3 +114,9 @@ db.contatos.updateMany(
     { telefone: /^41/ },
     { $set: { cidade: "Curitiba" } }
 );
+
+use('atividade_aula_2');
+db.contatos.deleteOne({ nome: "Ana Silva" });
+
+use('atividade_aula_2');
+db.contatos.deleteMany({ cidade: "Curitiba" });
