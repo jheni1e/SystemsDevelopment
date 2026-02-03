@@ -96,3 +96,21 @@ db.contatos.find({ cidade: /São Paulo/ });
 
 use('atividade_aula_2');
 db.contatos.find({ dataCadastro: { $gt: new Date("2023-01-01") } });
+
+use('atividade_aula_2');
+db.contatos.updateOne(
+    { nome: "Fernanda Fialho" },
+    { $set: { email: "fialho.fehfita@gmail.com", telefone: "41912345678" } }
+);
+
+use('atividade_aula_2');
+db.contatos.updateOne(
+    { nome: "Malu Geraldo" },
+    { $set: { cidade: "Curitiba" } }
+);
+
+use('atividade_aula_2');
+db.contatos.updateMany(
+    { telefone: /^41/ },
+    { $set: { cidade: "Curitiba" } }
+);
