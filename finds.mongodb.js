@@ -20,4 +20,4 @@ use('bosch');
 db.people.find({ $and: [{ name: /^M.*u$/ }, { lastName: /^c.*a$/ }] })
 
 use('bosch')
-db.people.find({ salary: { $gt: 2105 } }, { name: 1, lastName: 1 })
+db.people.find({ salary: { $gte: 2105 } }, { name: 1, lastName: 1 })
