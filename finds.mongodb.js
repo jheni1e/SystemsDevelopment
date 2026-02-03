@@ -8,7 +8,10 @@ use('bosch');
 db.people.find({ lastName: "joy" })
 
 use('bosch')
-db.people.find( { salary: { $gt: 2105 } } )
+db.people.find({ salary: { $gt: 2105 } })
 
 use('bosch');
 db.people.find({ name: /a/ })
+
+use('bosch');
+db.people.find({ lastName: /[^L][s$]/ })
