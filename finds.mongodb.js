@@ -9,3 +9,6 @@ db.people.find({ lastName: "joy" })
 
 use('bosch')
 db.people.find( { salary: { $gt: 2105 } } )
+
+use('bosch');
+db.people.find({ name: /a/ })
