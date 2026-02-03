@@ -14,4 +14,4 @@ use('bosch');
 db.people.find({ name: /a/ })
 
 use('bosch');
-db.people.find({ lastName: /[^L][s$]/ })
+db.people.find({ name: /^L.*s$/ })
