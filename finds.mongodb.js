@@ -15,3 +15,6 @@ db.people.find({ name: /a/ })
 
 use('bosch');
 db.people.find({ name: /^L.*s$/ })
+
+use('bosch');
+db.people.find({ $and: [{ name: /^M.*u$/ }, { lastName: /^c.*a$/ }] })
