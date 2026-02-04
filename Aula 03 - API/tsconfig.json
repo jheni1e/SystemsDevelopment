@@ -10,6 +10,7 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "moduleResolution": "node16"
-  }
+    "moduleResolution": "node16",
+  },
+  "extends": "@tsconfig/node22/tsconfig.json"
 }
