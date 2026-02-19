@@ -10,4 +10,6 @@ app.get('/', (req, res) => {
     res.status(200).send({ response: 'api funcionando!' })
 })
 
-app.listen(port, () => console.log(`Acesse: http://localhost:${port}/`));
+app.listen(port, () =>
+    console.log(`Acesse: http://localhost:${port}/`)
+);

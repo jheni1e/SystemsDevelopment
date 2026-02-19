@@ -3,16 +3,16 @@ import express, { Request, Response, Router } from 'express';
 const router: Router = express.Router();
 const people: object[] = [];
 
-router.post('/register', (req: Request, res: Response) => {
-    const { nome, sobrenome } = req.body
-    res.status(200).send({ response: `${nome} ${sobrenome} cadastrado(a) com sucesso!` });
-    people.push({ nome, sobrenome })
-});
-
-router.get('/usuarios', (req: Request, res: Response) => {
-    const people = req.query
-    res.status(200).send(people)
-});
+router
+    .post('/register', (req: Request, res: Response) => {
+        const { nome, sobrenome } = req.body
+        res.status(200).send({ response: `${nome} ${sobrenome} cadastrado(a) com sucesso!` });
+        people.push({ nome, sobrenome })
+    })
+    .get('/usuarios', (req: Request, res: Response) => {
+        const people = req.query
+        res.status(200).send(people)
+    });
 
 router.get('/getData/:id', (req: Request, res: Response) => {
     const { id } = req.params
