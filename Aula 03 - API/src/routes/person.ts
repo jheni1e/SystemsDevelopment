@@ -43,7 +43,7 @@ router
     .put('/atualizar/:id', (req: Request, res: Response) => {
         const { id } = req.params;
         const { nome, sobrenome } = req.body;
-        
+
         let convertedId = Number(id)
         const person = people.find(person => (person as { id: number }).id === convertedId);
 
