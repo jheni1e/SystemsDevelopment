@@ -12,9 +12,8 @@ router
     .get('/usuarios', (req: Request, res: Response) => {
         const people = req.query
         res.status(200).send(people)
-    });
-
-router.get('/getData/:id', (req: Request, res: Response) => {
+    })
+    .get('/usuarios/:id', (req: Request, res: Response) => {
     const { id } = req.params
     res.status(200).send(`Fazendo um get no servidor! id: ${id}`);
 });
