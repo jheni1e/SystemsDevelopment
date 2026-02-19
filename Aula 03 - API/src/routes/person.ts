@@ -12,8 +12,6 @@ router
         people.push({ id, nome, sobrenome })
     })
     .get('/usuarios', (req: Request, res: Response) => {
-        const people = req.query
-
         res.status(200).send({ response: people })
     })
     .get('/usuarios/:id', (req: Request, res: Response) => {
