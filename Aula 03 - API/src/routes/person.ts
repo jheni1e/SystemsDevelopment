@@ -5,9 +5,9 @@ const people: object[] = [];
 
 router
     .post('/register', (req: Request, res: Response) => {
-        const { nome, sobrenome } = req.body
-        res.status(200).send({ response: `${nome} ${sobrenome} cadastrado(a) com sucesso!` });
-        people.push({ nome, sobrenome })
+        const { id, nome, sobrenome } = req.body
+        res.status(200).send({ response: `${id} — ${nome} ${sobrenome} cadastrado(a) com sucesso!` });
+        people.push({ id, nome, sobrenome })
     })
     .get('/usuarios', (req: Request, res: Response) => {
         const people = req.query
@@ -26,7 +26,12 @@ router
         const { id } = req.params;
         const { nome, sobrenome } = req.body;
 
-        res.status(200).send({response: `Atualizando o usuário ${id} -> ${nome} ${sobrenome}`})
+        res.status(200).send({ response: `Atualizando o usuário ${id} -> ${nome} ${sobrenome}` })
+    })
+    .delete('/deletar/:id', (req: Request, res: Response) => {
+        const { id } = req.params;
+
+        res.status(200).send(`Pessoa com o id: ${id} foi deletada `)
     });
 
 export default router;
