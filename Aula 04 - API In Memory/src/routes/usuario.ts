@@ -13,67 +13,108 @@ const router: Router = express.Router();
 const users: User[] = [];
 
 router
-    .post('/usuarios', (req: Request, res: Response) => {
-        const { id, nome, email, tipo } = req.body
+    .post('/', (req: Request, res: Response) => {
+        const { nome, email, tipo } = req.body
 
-        res.status(200).send({ response: `${nome} cadastrado(a) com sucesso!` });
+        if (!nome || !email || !tipo) {
+            return res.status(400).send({ response: 'Campos obrigatórios: nome, email ou tipo.' });
+        }
+
+        let id = users.length > 0 ? users[users.length - 1].id + 1 : 1;
+        const user = users.some(user => user.email === email || user.id === id);
+
+        if (user) {
+            return res.status(400).send({ response: 'O id de usuário ou email já está cadastrado.' });
+        }
 
         users.push({
-            id, nome, email,
-            tipo, ativo: true,
+            id,
+            nome,
+            email,
+            tipo,
+            ativo: true,
             createdAt: new Date()
         })
+
+        res.status(201).send({ response: `${nome} cadastrado(a) com sucesso!` });
     })
-    .get('/usuarios', (req: Request, res: Response) => {
+    .get('/', (req: Request, res: Response) => {
         res.status(200).send({ response: users })
     })
-    .get('/usuarios/:id', (req: Request, res: Response) => {
+    .get('/:id', (req: Request, res: Response) => {
         const { id } = req.params
         let convertedId = Number(id)
-        const person = users.find(person => (person as { id: number }).id === convertedId);
+        const user = users.find(user => user.id === convertedId);
 
-        if (!person) {
-            return res.status(404).send({ response: `Usuário com id ${id} não encontrado.` });
+        if (!user) {
+            return res.status(404).send({ response: 'Usuário não encontrado.' });
+        } else {
+            res.status(200).send({ response: user });
         }
-
-        res.status(200).send({ response: person });
     })
-    .get('/usuario', (req: Request, res: Response) => {
-        const { id, nome, sobrenome } = req.query
-        let convertedId = Number(id)
-        const person = users.find(person => (person as { id: number }).id === convertedId
-            && (person as { nome: string }).nome === nome);
-
-        if (!person) {
-            return res.status(404).send({ response: `Usuário com id ${id} não encontrado.` });
-        }
-
-        res.status(200).send({ response: person });
-    })
-    .put('/atualizar/:id', (req: Request, res: Response) => {
+    .put('/:id', (req: Request, res: Response) => {
         const { id } = req.params;
-        const { nome, sobrenome } = req.body;
+        const { nome, email, tipo, ativo } = req.body;
+
+        if (!nome || !email || !tipo) {
+            return res.status(400).send({ response: 'Campos obrigatórios: nome, email ou tipo.' });
+        }
 
         let convertedId = Number(id)
-        const person = users.find(person => (person as { id: number }).id === convertedId);
+        const user = users.find(user => user.id === convertedId);
 
-        if (!person) {
+        if (!user) {
             return res.status(404).send({ response: `Usuário com id ${id} não encontrado.` });
         }
 
-        (person as { nome: string, sobrenome: string }).nome = nome;
-        (person as { nome: string, sobrenome: string }).sobrenome = sobrenome;
+        if (email && users.some(user => user.email === email)) {
+            return res.status(400).send({ response: 'O email já está cadastrado.' });
+        }
 
-        res.status(200).send({ response: `Usuário ${id} atualizado para ${nome} ${sobrenome}.` })
+        user.nome = nome;
+        user.email = email;
+        user.tipo = tipo;
+        if (ativo !== undefined) user.ativo = ativo;
+
+        res.status(200).send({ response: `Usuário ${nome} atualizado com sucesso.` })
+
     })
-    .delete('/deletar/:id', (req: Request, res: Response) => {
+    .patch('/:id', (req: Request, res: Response) => {
+        const { id } = req.params;
+        const { nome, email, tipo, ativo } = req.body;
+
+        let convertedId = Number(id)
+        const user = users.find(user => user.id === convertedId);
+
+        if (!user) {
+            return res.status(404).send({ response: `Usuário com id ${id} não encontrado.` });
+        }
+
+        if (email && users.some(user => user.email === email)) {
+            return res.status(400).send({ response: 'O email já está cadastrado.' });
+        }
+
+        if (nome) user.nome = nome;
+        if (email) user.email = email;
+        if (tipo) user.tipo = tipo;
+        if (ativo !== undefined) user.ativo = ativo;
+
+        res.status(200).send({ response: 'Usuário atualizado com sucesso.' })
+    })
+    .delete('/:id', (req: Request, res: Response) => {
         const { id } = req.params;
         let convertedId = Number(id)
 
-        const personIndex = users.findIndex(person => (person as { id: number }).id === convertedId);
-        users.splice(personIndex, 1);
+        const userIndex = users.findIndex(user => user.id === convertedId);
+        const user = users[userIndex];
 
-        res.status(200).send(`Pessoa com o id: ${id} foi deletada `)
+        if (!user) {
+            return res.status(404).send({ response: 'Usuário  não encontrado.' });
+        }
+
+        users.splice(userIndex, 1);
+
+        res.status(200).send(`Usuário ${user.nome} foi deletado.`)
     });
 
 export default router;
