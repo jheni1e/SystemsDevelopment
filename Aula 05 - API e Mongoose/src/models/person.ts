@@ -12,6 +12,6 @@ const personSchema: Schema = new Schema({
     age: { type: Number, required: true },
 });
 
-const Person = mongoose.model<IPerson>('Person', personSchema);
+const Person = mongoose.model<IPerson>('Person', personSchema, 'Person');
 
 export default Person;
