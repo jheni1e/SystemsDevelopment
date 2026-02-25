@@ -1,6 +1,7 @@
 {
-  "name": "aula-04---api-in-memory",
+  "name": "aula-05---api-e-mongoose",
   "version": "1.0.0",
+  "description": "npm i mongoose config",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,7 +10,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "type": "module",
   "devDependencies": {
     "@tsconfig/node22": "^22.0.5",
