@@ -20,32 +20,23 @@ class PersonController {
     }
 
     static async updateUser(req: Request, res: Response) {
-        const { id } = req.params;
-        const { name, lastname, age } = req.body;
+        const { person } = req;
 
-        try {
-            const person = await Person.findByIdAndUpdate(id, { name, lastname, age }, { new: true });
-            if (!person) {
-                res.status(404).json({ message: 'Pessoa não encontrada' });
-            }
-            res.status(200).json(person);
-        } catch (error) {
-            res.status(400).json({ message: 'Erro ao atualizar pessoa', error });
+        if (!person) {
+            return res.status(404).json({ message: 'Pessoa não encontrada' });
         }
+
+        res.status(200).json({response: "Pessoa atualizada com sucesso!"});
     }
 
     static async deleteUser(req: Request, res: Response) {
-        const { id } = req.params;
+        const { person } = req;
 
-        try {
-            const person = await Person.findByIdAndDelete(id);
-            if (!person) {
-                res.status(404).json({ message: 'Pessoa não encontrada' });
-            }
-            res.status(200).json({ message: 'Pessoa deletada com sucesso' });
-        } catch (error) {
-            res.status(400).json({ message: 'Erro ao deletar pessoa', error });
+        if (!person) {
+            return res.status(404).json({ message: 'Pessoa não encontrada' });
         }
+
+        res.status(200).json({response: "Pessoa deletada com sucesso!"});
     }
 }
 
