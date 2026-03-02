@@ -4,7 +4,9 @@ import PersonController from '../controllers/personController.ts';
 const router: Router = express.Router();
 
 router
-    // .post('/register', )
-    .get('/people', PersonController.getUsers);
-    
+    .get('/people', PersonController.getUsers)
+    .post('/register', PersonController.registerUser)
+    .put('/person/:id', PersonController.updateUser)
+    .delete('/person/:id', PersonController.deleteUser);
+
 export default router;
