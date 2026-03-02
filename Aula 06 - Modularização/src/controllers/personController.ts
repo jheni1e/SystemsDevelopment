@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import Person from "../src/models/person.ts";
+import Person from "../models/person.ts";
 
 class PersonController {
     static async getUsers(req: Request, res: Response) {
@@ -7,9 +7,9 @@ class PersonController {
         return res.status(200).send({ response: users });
     }
 
-    static async registerUser(req: Request, res: Response) {
+    // static async registerUser(req: Request, res: Response) {
         
-    }
+    // }
 }
 
 export default PersonController;
