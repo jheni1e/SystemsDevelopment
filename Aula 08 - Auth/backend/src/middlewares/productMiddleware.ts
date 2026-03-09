@@ -14,13 +14,7 @@ export const validateRegister = (req: Request, res: Response, next: NextFunction
 export const validateObjectId = (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
 
-    if (typeof id !== "string") {
-        return res.status(400).json({ message: "ID inválido." });
-    }
-
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(400).json({ message: "ID inválido." });
-    }
+    //mudar middleware
 
     next();
 };
